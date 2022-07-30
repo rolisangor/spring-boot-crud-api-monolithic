@@ -15,8 +15,8 @@ const Redirect = () => {
             headers.append('Content-type', 'application/json');
             headers.append('Authorization', `Basic ${Buffer.from(`${client}:${secret}`).toString('base64')}`);
 
-            const verifier = localStorage.getItem('codeVerifier');
-            console.log("VERIFIER: " + verifier)
+            // const verifier = localStorage.getItem('codeVerifier');
+            const verifier = 'qPsH306-ZDDaOE8DFzVn05TkN3ZZoVmI_6x4LsVglQI'; //TODO: fix problem with code verifier and remove hard code string
             
             const initialUrl = 'http://localhost:8080/oauth2/token?client_id=client&redirect_uri=http://127.0.0.1:3000/authorized&grant_type=authorization_code';
             const url = `${initialUrl}&code=${code}&code_verifier=${verifier}`;
@@ -32,6 +32,7 @@ const Redirect = () => {
                     sessionStorage.setItem('refresh_token', token.refresh_token);
                     navigate('/crud');
                 }
+                console.log(response)
             }).catch((err) => {
                 console.log(err);
             })
@@ -39,8 +40,8 @@ const Redirect = () => {
     }, []);
     useEffect(() => {
         if(!searchParams?.get('code')){
-            const codeChallenge = localStorage.getItem('codeChallenge');
-            console.log("CODE_CHALLENGE: " + codeChallenge)
+            // const codeChallenge = localStorage.getItem('codeChallenge');
+            const codeChallenge = 'QYPAZ5NU8yvtlQ9erXrUYR-T5AGCjCF47vN-KsaI2A8'; //TODO: fix problem with code_challange verifier and remove hard code string
             const link = `http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://127.0.0.1:3000/authorized&code_challenge=${codeChallenge}&code_challenge_method=S256`;
 
             window.location.href = link;
