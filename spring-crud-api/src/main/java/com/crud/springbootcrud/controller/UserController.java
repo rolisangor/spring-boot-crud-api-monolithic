@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/principal")
     public ResponseEntity<String> getPrincipal(Authentication authentication) {
         log.info("AUTHENTICATION_NAME: {}", authentication.getName());
-        return ResponseEntity.ok("Get principal success");
+        return ResponseEntity.ok("Get principal success " + authentication.getName());
     }
 
     @PostMapping("/sign-up")
@@ -34,7 +34,6 @@ public class UserController {
     }
 
     @GetMapping
-    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<UserDto>> getAllUsers(@RequestParam int page, @RequestParam int size) {
         return ResponseEntity.ok(userService.getAllUsers(page, size));
     }

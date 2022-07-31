@@ -32,7 +32,6 @@ const Redirect = () => {
                     sessionStorage.setItem('refresh_token', token.refresh_token);
                     navigate('/crud');
                 }
-                console.log(response)
             }).catch((err) => {
                 console.log(err);
             })
